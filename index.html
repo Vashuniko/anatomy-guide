@@ -3,286 +3,504 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Гайд: Анатомия нашей судьбы</title>
+    <title>Анатомия нашей судьбы | Александр Герасимов</title>
+    
+    <!-- Подключаем шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
     <style>
-        /* Оптимизация для печати */
-        @media print {
-            @page { size: A4; margin: 0; }
-            html, body { width: 210mm; height: auto; background: white !important; margin: 0 !important; padding: 0 !important; }
-            .no-print { display: none !important; }
-            .a4-page { width: 210mm !important; height: 297mm !important; padding: 15mm 20mm !important; margin: 0 !important; page-break-after: always !important; background: #fffdf7 !important; border: none !important; box-shadow: none !important; position: relative !important; }
-            * { box-shadow: none !important; text-shadow: none !important; }
-            .sale-banner { border: 1px solid #1a365d !important; }
+        :root {
+            --paper-color: #fcfbf9;
+            --ink-color: #2b2622;
+            --accent-gold: #c5a065;
+            --watercolor-blue: rgba(121, 149, 163, 0.15);
+            --watercolor-sepia: rgba(139, 115, 85, 0.1);
+            --font-main: 'Cormorant Garamond', serif;
+            --font-script: 'Pinyon Script', cursive;
+            --font-sans: 'Montserrat', sans-serif;
+            
+            /* A4 Dimensions */
+            --page-width: 210mm;
+            --page-height: 296mm;
         }
 
-        body { background-color: #ced4da; font-family: 'EB Garamond', serif; color: #2c2c2c; line-height: 1.45; margin: 0; padding: 20px 0; }
-        .header-nav { position: fixed; top: 0; left: 0; right: 0; height: 60px; background: #1a365d; display: flex; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.2); gap: 20px; }
-        .btn { padding: 8px 18px; border-radius: 6px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer; border: none; transition: 0.2s; text-transform: uppercase; }
-        .btn-print { background: #2563eb; color: white; }
-        .btn-ai { background: #6366f1; color: white; display: flex; align-items: center; gap: 8px; }
-        .a4-page { width: 210mm; height: 297mm; padding: 18mm 20mm; margin: 60px auto 40px auto; background: #fffdf7; box-shadow: 0 0 30px rgba(0,0,0,0.2); position: relative; display: flex; flex-direction: column; box-sizing: border-box; overflow: hidden; }
-        .paper-texture { position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.05; pointer-events: none; background-image: url('https://www.transparenttextures.com/patterns/paper.png'); }
-        h1, h2, h3, h4 { font-family: 'Merriweather', serif; color: #1a365d; }
-        .watercolor-frame { border: 1px solid #e2e8f0; padding: 5px; background: white; margin: 10px 0; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; min-height: 200px; background: #fdfdfd; }
-        .watercolor-frame img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s ease-in; }
-        .watercolor-frame img.loaded { opacity: 1; }
-        .loader { position: absolute; width: 40px; height: 40px; border: 3px solid #f3f3f3; border-top: 3px solid #1a365d; border-radius: 50%; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .footer { margin-top: auto; text-align: center; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 5px; }
-        .dropcap { float: left; font-size: 65px; line-height: 50px; padding-top: 4px; padding-right: 8px; font-family: 'Merriweather', serif; color: #1a365d; }
-        .chapter-title { text-align: center; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; border-bottom: 1px double #1a365d; padding-bottom: 5px; font-size: 1rem; font-weight: bold; }
-        .quote-box { font-style: italic; border-left: 3px solid #1a365d; padding-left: 20px; margin: 15px 0; color: #334155; font-size: 1.05rem; }
-        .accent-block { background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; margin: 8px 0; font-family: 'Inter', sans-serif; font-size: 0.85rem; }
-        .tight-text { line-height: 1.35; }
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #525659;
+            font-family: var(--font-main);
+            color: var(--ink-color);
+            line-height: 1.5;
+            font-feature-settings: "kern" 1, "liga" 1;
+        }
+
+        /* --- СТРАНИЦА --- */
+        .page {
+            width: var(--page-width);
+            height: var(--page-height);
+            margin: 30px auto;
+            background-color: var(--paper-color);
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+            padding: 20mm 25mm;
+            
+            /* Текстура бумаги */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        /* --- ДЕКОР --- */
+        .watercolor-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .blob-1 { top: -80px; right: -80px; width: 400px; height: 400px; background: var(--watercolor-blue); opacity: 0.6; }
+        .blob-2 { bottom: 50px; left: -100px; width: 500px; height: 400px; background: var(--watercolor-sepia); opacity: 0.5; }
+        .blob-center { top: 30%; left: 20%; width: 60%; height: 40%; background: rgba(197, 160, 101, 0.08); }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        /* --- ТИПОГРАФИКА --- */
+        h1 {
+            font-family: var(--font-main);
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 0.9;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: var(--font-main);
+            font-size: 2.2rem;
+            color: #1a1a1a;
+            text-align: center;
+            border-bottom: 1px solid var(--accent-gold);
+            padding-bottom: 15px;
+            margin: 0 0 20px 0;
+            line-height: 1.1;
+        }
+
+        h3 {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin: 20px 0 10px 0;
+            color: #6d5e50;
+        }
+
+        /* Глобальный стиль параграфов с выравниванием по ширине */
+        p, li {
+            font-size: 13pt;
+            margin-bottom: 10px;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        ul { list-style: none; padding-left: 0; margin: 10px 0; }
+        li { position: relative; padding-left: 1.5em; line-height: 1.4; margin-bottom: 8px; }
+        li::before { content: "•"; position: absolute; left: 0; color: var(--accent-gold); font-size: 1.2em; }
+        strong { font-weight: 700; color: #000; }
+
+        /* --- ВИЗУАЛЫ --- */
+        .illustration-box {
+            width: 100%;
+            flex-grow: 1; 
+            min-height: 200px;
+            margin: 20px 0;
+            
+            border: 1px solid #dcd8d0;
+            outline: 1px solid rgba(197, 160, 101, 0.3);
+            outline-offset: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px;
+            color: #777;
+            font-family: var(--font-sans);
+            font-style: italic;
+            font-size: 0.95rem;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+        }
+        .illustration-icon {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .quote-intro {
+            font-size: 1.4rem;
+            font-style: italic;
+            text-align: center;
+            margin: 0 0 30px 0;
+            padding: 20px;
+            color: #4a4a4a;
+            border-top: 1px solid rgba(197, 160, 101, 0.3);
+            border-bottom: 1px solid rgba(197, 160, 101, 0.3);
+        }
+
+        /* --- ФИНАЛЬНАЯ СТРАНИЦА --- */
+        .promo-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            /* Убрано вертикальное центрирование для поднятия контента вверх */
+            justify-content: flex-start; 
+            align-items: center;
+            text-align: center;
+            border: 2px solid var(--accent-gold);
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.4);
+            margin: 20px 0;
+        }
         
-        /* AI Modal */
-        #ai-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
-        .modal-content { background: #fffdf7; width: 90%; max-width: 500px; padding: 30px; border-radius: 12px; border: 4px border-double border-[#1a365d]; font-family: 'Inter', sans-serif; }
-        .ai-input { width: 100%; height: 100px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; margin: 15px 0; resize: none; }
-        #ai-result { margin-top: 15px; padding: 15px; background: #f0f4f8; border-radius: 6px; font-size: 14px; border-left: 4px solid #6366f1; display: none; }
+        /* Исправление типографики для промо-блока: Центровка и основной шрифт */
+        .promo-text-unified {
+            font-family: var(--font-main);
+            font-size: 1.25rem;
+            line-height: 1.4;
+            color: #2b2622;
+            max-width: 650px;
+            margin: 10px 0;
+            text-align: center !important;
+        }
+
+        .promo-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+            margin: 30px 0;
+            line-height: 1;
+        }
+
+        .btn-book {
+            position: relative;
+            display: inline-block;
+            padding: 18px 50px;
+            background-color: var(--ink-color);
+            color: #fff;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            font-size: 1rem;
+            border: 1px solid var(--accent-gold);
+            transition: all 0.3s;
+            margin-top: 30px;
+        }
+        .btn-book:hover {
+            background-color: var(--accent-gold);
+            color: #fff;
+            border-color: var(--ink-color);
+        }
+
+        /* Курсор */
+        .cursor-icon {
+            position: absolute;
+            bottom: -25px;
+            right: -25px;
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+            pointer-events: none;
+        }
+
+        /* Специальный класс для центровки на 1 странице */
+        .cover-content-wrapper {
+            margin-top: auto;
+            margin-bottom: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer {
+            margin-top: 50px; 
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            color: #999;
+            text-transform: uppercase;
+            width: 100%;
+        }
+
+        @media print {
+            body { background: none; }
+            .page { margin: 0; box-shadow: none; page-break-after: always; width: 210mm; height: 296mm; }
+            .page:last-child { page-break-after: auto; }
+        }
     </style>
 </head>
 <body>
-    <div class="header-nav no-print">
-        <button class="btn btn-print" onclick="window.print()">📥 СКАЧАТЬ ГАЙД (PDF)</button>
-        <button class="btn btn-ai" onclick="openAiModal()">✨ СОВЕТ ОТ ГЕРАСИМОВА</button>
-    </div>
 
-    <div id="ai-modal" class="no-print">
-        <div class="modal-content">
-            <h3 class="text-xl font-bold text-[#1a365d]">Анализ вашего сценария</h3>
-            <p class="text-sm text-gray-600 mt-2">Опишите вашу ситуацию, и ИИ предложит стратегию решения.</p>
-            <textarea id="ai-user-query" class="ai-input" placeholder="Например: Я постоянно чувствую себя Золушкой..."></textarea>
-            <div class="flex gap-3">
-                <button class="btn btn-ai" id="ai-submit" onclick="runAiAnalysis()">Анализировать</button>
-                <button class="btn" style="background:#e2e8f0" onclick="closeAiModal()">Закрыть</button>
-            </div>
-            <div id="ai-result"></div>
-        </div>
-    </div>
+    <!-- СТРАНИЦА 1: ОБЛОЖКА -->
+    <div class="page">
+        <div class="watercolor-blob blob-1"></div>
+        <div class="watercolor-blob blob-2"></div>
+        
+        <div class="content" style="justify-content: space-between; padding-top: 20px;">
+            <div class="cover-content-wrapper">
+                <div style="font-family: var(--font-sans); font-size: 0.9rem; letter-spacing: 4px; color: #888; margin-bottom: 30px;">АЛЕКСАНДР ГЕРАСИМОВ</div>
+                
+                <h1>АНАТОМИЯ<br>НАШЕЙ СУДЬБЫ</h1>
+                <div style="width: 60px; height: 2px; background: var(--accent-gold); margin: 20px auto;"></div>
+                <div style="font-family: var(--font-script); font-size: 2.8rem; color: #665c52; margin-bottom: 40px;">Сценарное программирование</div>
 
-    <!-- СТРАНИЦА 1 -->
-    <div class="a4-page">
-        <div class="paper-texture"></div>
-        <div class="flex flex-col items-center justify-center flex-grow border-4 border-double border-[#1a365d] m-2 p-10 text-center relative z-10">
-            <p class="text-xl tracking-[0.4em] text-[#1a365d] mb-4 uppercase font-bold">Александр Герасимов</p>
-            <div class="w-24 h-1 bg-[#1a365d] mb-14"></div>
-            <h1 class="text-5xl leading-tight mb-10 uppercase tracking-tighter">Анатомия<br>нашей судьбы</h1>
-            <div class="watercolor-frame w-full max-w-md h-[300px]">
-                <div class="loader"></div>
-                <img data-prompt="Kind children's book watercolor illustration, a vintage fairytale book opening with golden stardust, happy fairytale characters silhouettes rising, soft pastel colors, masterpiece, whimsical and warm atmosphere" alt="Обложка">
-            </div>
-            <h2 class="text-2xl italic text-gray-600 mt-12">В какой сказке вы живете?</h2>
-            <p class="text-lg mt-6 max-w-xs uppercase tracking-widest font-light">Сценарное программирование через сказки</p>
-            <div class="mt-auto pt-10"><p class="tracking-widest text-sm text-gray-400 uppercase">© 2025 | АЛЕКСАНДР ГЕРАСИМОВ</p></div>
-        </div>
-    </div>
-
-    <!-- СТРАНИЦА 2 -->
-    <div class="a4-page">
-        <div class="paper-texture"></div>
-        <div class="relative z-10 flex flex-col h-full">
-            <h2 class="chapter-title">1. Сказка как «Прививка Реальности»</h2>
-            <div class="quote-box">«Сказка — это демо-версия вашей реальности, которую вы выбрали в детстве».</div>
-            <p class="mb-4 text-lg"><span class="dropcap">С</span>казка — первая модель мира ребенка. Безопасный способ познакомиться с миром и выжить.</p>
-            <div class="space-y-4 text-lg">
-                <p><strong>Механика выбора:</strong> Мы выбираем ту историю, которая кажется нам наиболее эффективной или понятной в нашем окружении.</p>
-                <p><strong>Сценарий:</strong> Выбрав сказку, вы выбрали судьбу. Вы будете бессознательно искать тех же врагов и тот же финал.</p>
-            </div>
-            <div class="watercolor-frame mt-8 flex-grow mb-6 h-[450px]">
-                <div class="loader"></div>
-                <img data-prompt="Kind children's book watercolor illustration, a cute small child sitting comfortably by a large moonlit window reading an ancient book, soft features, dreamy and ethereal lighting, cozy room" alt="Ребенок">
-            </div>
-            <div class="footer">Анатомия нашей судьбы | Александр Герасимов</div>
-        </div>
-    </div>
-
-    <!-- СТРАНИЦА 3 -->
-    <div class="a4-page">
-        <div class="paper-texture"></div>
-        <div class="relative z-10 flex flex-col h-full">
-            <h2 class="chapter-title">2. Структура вашего Сценария</h2>
-            <p class="mb-6 text-lg">Чтобы понять свою судьбу, разложите свою любимую историю по этим пунктам:</p>
-            <div class="grid grid-cols-2 gap-6 leading-tight">
-                <div class="p-4 border-l-2 border-[#1a365d]"><h4 class="font-bold text-[#1a365d]">1. Начало (Старт)</h4><p class="text-sm italic">«Жили-были...»</p><p class="text-sm">Ваша привычная точка входа в любые дела.</p></div>
-                <div class="p-4 border-l-2 border-[#1a365d]"><h4 class="font-bold text-[#1a365d]">2. Конфликт</h4><p class="text-sm">Проблема, которую вы привыкли преодолевать.</p></div>
-                <div class="p-4 border-l-2 border-[#1a365d]"><h4 class="font-bold text-[#1a365d]">3. Кульминация</h4><p class="text-sm">Как вы решаете проблему? Сами? Ждете магии?</p></div>
-                <div class="p-4 border-l-2 border-[#1a365d]"><h4 class="font-bold text-[#1a365d]">4. Финал</h4><p class="text-sm">Результат, к которому вы бессознательно стремитесь.</p></div>
-            </div>
-            <div class="watercolor-frame mt-8 flex-grow h-[350px]">
-                <div class="loader"></div>
-                <img data-prompt="Kind children's book watercolor illustration, a magical golden path made of stardust winding through a garden of giant magical flowers, glowing fairytale symbols floating in light" alt="Схема">
-            </div>
-            <div class="footer">Анатомия нашей судьбы | Александр Герасимов</div>
-        </div>
-    </div>
-
-    <!-- СТРАНИЦА 4 -->
-    <div class="a4-page">
-        <div class="paper-texture"></div>
-        <div class="relative z-10 flex flex-col h-full">
-            <h2 class="chapter-title">3. Ролевые модели</h2>
-            <p class="mb-6 text-xl text-center italic">Важно не только какая сказка, но и кем вы себя в ней видите.</p>
-            <div class="space-y-6 px-4 tight-text text-lg">
-                <section>
-                    <h3 class="font-bold text-[#1a365d]">⚔️ Протагонист</h3>
-                    <p class="text-md">Субъект своей жизни. Тот, кто действует и несет ответственность.</p>
-                </section>
-                <section>
-                    <h3 class="font-bold text-[#1a365d]">🪞 Объект</h3>
-                    <p class="text-md">Тот, с кем «случается» сюжет. Ожидание спасителя.</p>
-                </section>
-                <section>
-                    <h3 class="font-bold text-[#1a365d]">🎭 Антагонист</h3>
-                    <p class="text-md">Роль «злодея». Иногда мы выбираем её, потому что она кажется более сильной.</p>
-                </section>
-            </div>
-            <div class="watercolor-frame mt-12 flex-grow h-[400px] mb-4">
-                <div class="loader"></div>
-                <img data-prompt="Kind children's book watercolor illustration, three happy expressive theatrical masks with smiles on a cozy wooden shelf in a vintage toy shop, warm golden lighting" alt="Маски">
-            </div>
-            <div class="footer">Анатомия нашей судьбы | Александр Герасимов</div>
-        </div>
-    </div>
-
-    <!-- СТРАНИЦА 5 -->
-    <div class="a4-page">
-        <div class="paper-texture"></div>
-        <div class="relative z-10 flex flex-col h-full">
-            <h2 class="chapter-title">4. Типология сценариев</h2>
-            <div class="space-y-6 tight-text text-lg">
-                <section><h3 class="text-lg font-bold text-blue-900">«Колобок»: Бегство</h3><p class="text-md leading-snug">Герой мастерски избегает поглощения (брака, обязательств), но в итоге всегда находит свою «Лису», которая его доедает.</p></section>
-                <section><h3 class="text-lg font-bold text-blue-900">«Золушка»: Заслуги</h3><p class="text-md leading-snug">Нужно много работать и терпеть унижения, чтобы в конце пришел Принц (или контракт) и спас вас.</p></section>
-                <section><h3 class="text-lg font-bold text-blue-900">«Красная Шапочка»: Риск</h3><p class="text-md leading-snug">Бессознательный поиск опасности там, где просили её избегать. Прогулка с волками как образ жизни.</p></section>
-            </div>
-            <div class="watercolor-frame mt-8 flex-grow h-[420px] mb-4">
-                <div class="loader"></div>
-                <img data-prompt="Kind children's book watercolor illustration, a cute little girl in a bright red cloak walking through a beautiful sunny forest, she carries a wicker basket with both hands clearly visible, happy face, golden light rays" alt="Сказка">
-            </div>
-            <div class="footer">Анатомия нашей судьбы | Александр Герасимов</div>
-        </div>
-    </div>
-
-    <!-- СТРАНИЦА 6 -->
-    <div class="a4-page">
-        <div class="paper-texture"></div>
-        <div class="relative z-10 flex flex-col h-full">
-            <h2 class="chapter-title">5. Технология взлома</h2>
-            <p class="mb-4 text-lg">Сценарий можно переписать:</p>
-            <div class="space-y-4 text-lg leading-snug">
-                <div class="pl-4 border-l-2 border-slate-200"><p><strong>1. Инвентаризация:</strong> Вспомните свою сказку.</p></div>
-                <div class="pl-4 border-l-2 border-slate-200"><p><strong>2. Анализ финала:</strong> Куда ведет этот путь?</p></div>
-                <div class="pl-4 border-l-2 border-slate-200"><p><strong>3. Редактирование:</strong> Измените поступок героя.</p></div>
-                <div class="pl-4 border-l-2 border-slate-200"><p><strong>4. Мета-позиция:</strong> Станьте Автором сюжета.</p></div>
-            </div>
-            <div class="watercolor-frame mt-8 flex-grow h-[380px] mb-4">
-                <div class="loader"></div>
-                <img data-prompt="Kind children's book watercolor illustration, a human hand holding a vintage fountain pen, clearly visible five fingers, writing golden glowing words in a magical book, ink splatters, cozy library" alt="Взлом">
-            </div>
-            <div class="footer">Анатомия нашей судьбы | Александр Герасимов</div>
-        </div>
-    </div>
-
-    <!-- СТРАНИЦА 7 -->
-    <div class="a4-page">
-        <div class="paper-texture"></div>
-        <div class="relative z-10 flex flex-col h-full">
-            <h2 class="chapter-title">6. Практический выход</h2>
-            <div class="space-y-5 text-lg leading-snug">
-                <section>
-                    <h4 class="font-bold text-[#1a365d]">В карьере:</h4><p class="text-md">Перестаньте ждать мачеху. Предъявите свои условия сами.</p>
-                </section>
-                <section>
-                    <h4 class="font-bold text-[#1a365d]">В отношениях:</h4><p class="text-md">Выберите безопасность вместо привычного риска с волками.</p>
-                </section>
-                <section>
-                    <h4 class="font-bold text-[#1a365d]">В решениях:</h4><p class="text-md">Смените паттерн бегства на паттерн переговоров.</p>
-                </section>
-            </div>
-            <div class="watercolor-frame mt-8 flex-grow h-[320px] mb-4">
-                <div class="loader"></div>
-                <img data-prompt="Kind children's book watercolor illustration, a beautiful antique silver key lying on an open human palm with clear fingers, magical sparkles, glowing keyhole appearing in the background" alt="Ключ">
-            </div>
-            <div class="footer">Анатомия нашей судьбы | Александр Герасимов</div>
-        </div>
-    </div>
-
-    <!-- СТРАНИЦА 8: ФИНАЛ -->
-    <div class="a4-page">
-        <div class="paper-texture"></div>
-        <div class="relative z-10 flex flex-col items-center justify-between flex-grow text-center py-4 h-full">
-            <div>
-                <h2 class="text-4xl mb-4 uppercase tracking-widest font-bold">Перепишите<br>свой 2026 год</h2>
-                <p class="text-[1.1rem] leading-tight mb-6 max-w-lg mx-auto">Чтобы заложить новый фундамент, нужны инструменты.</p>
-            </div>
-            <div class="watercolor-frame w-full max-w-xl flex-grow h-[320px] mb-6">
-                <div class="loader"></div>
-                <img data-prompt="Kind children's book watercolor illustration, a warm library study at night, glowing fireplace, falling snow outside, a desk with a candle and an open journal, cozy atmosphere" alt="Финал">
-            </div>
-            <div class="w-full">
-                <div class="bg-[#1a365d] text-white p-6 mb-6 relative sale-banner rounded-sm">
-                    <h3 class="text-white text-xl mb-3 font-bold uppercase tracking-widest">Только с 24 по 26 декабря</h3>
-                    <div class="text-5xl font-bold text-[#fffdf7] mb-2 tracking-tighter">СКИДКИ ДО 80%</div>
+                <div class="illustration-box" style="border: 2px solid var(--accent-gold); flex-grow: 0; height: 350px;">
+                    <div class="illustration-icon">✦</div>
+                    <p style="text-align: center; font-style: italic;">[Визуальный образ: Старинный фолиант лежит на мхе в лесу. Из него исходит мягкое золотое свечение, формирующее призрачные силуэты замков и драконов.]</p>
                 </div>
-                <a href="https://t.me/+k9vmDKGUPapmYzMy" target="_blank" class="p-5 border-2 border-[#1a365d] inline-block bg-white mb-4 hover:bg-slate-50 transition-all no-underline group">
-                    <div class="flex items-center gap-3">
-                        <p class="font-bold tracking-[0.2em] text-[#1a365d] text-lg uppercase m-0 p-0">В КАНАЛ РАСПРОДАЖИ</p>
-                        <svg xmlns="http://www.w3.org/2001/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a365d" stroke-width="2"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></svg>
-                    </div>
+
+                <div style="margin-top: 40px; font-family: var(--font-sans); font-size: 0.8rem; color: #999; letter-spacing: 1px;">
+                    РУКОВОДСТВО ПО ИЗМЕНЕНИЮ РЕАЛЬНОСТИ
+                </div>
+            </div>
+
+            <div class="footer">
+                <span>Анатомия судьбы</span>
+                <span>2025 | Александр Герасимов</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА 2: ГЛАВА 1 -->
+    <div class="page">
+        <div class="watercolor-blob blob-1" style="opacity: 0.4;"></div>
+        <div class="content">
+            <div class="quote-intro">
+                «Сказка — это не просто текст. Это демо-версия вашей реальности, которую вы выбрали еще в детстве и продолжаете воспроизводить до сих пор».
+            </div>
+
+            <h2>1. Сказка как<br>«Прививка Реальности»</h2>
+            
+            <p>Сказка — это первая модель мира, которую получает ребенок. Это безопасный способ познакомиться с опасностями, конфликтами и стратегиями выживания.</p>
+            <p><strong>Механика выбора:</strong> Родители читают сотни сказок, но «цепляет» ребенка только одна. Этот выбор — бессознательный кастинг. Ребенок выбирает ту стратегию, которая кажется ему наиболее эффективной.</p>
+            <p><strong>Сценарий:</strong> Если вы выбрали сказку, вы выбрали судьбу. Вы будете искать в жизни тех же врагов, тех же спасателей и тот же финал.</p>
+
+            <div class="illustration-box">
+                <div class="illustration-icon">✦</div>
+                [Иллюстрация: Ребенок, тянущийся к высокой книжной полке. Тени от книг на стене превращаются в силуэты волка, феи и короля, намекая на будущий выбор сценария.]
+            </div>
+
+            <div class="footer">
+                <span>Анатомия судьбы</span>
+                <span>2025 | Александр Герасимов</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА 3: ГЛАВА 2 -->
+    <div class="page">
+        <div class="watercolor-blob blob-center"></div>
+        <div class="content">
+            <h2>2. Структура вашего Сценария</h2>
+            <p>Сценарий сказки (и вашей жизни) состоит из четырех обязательных элементов. Чтобы понять свою судьбу, разложите свою любимую историю по этим пунктам:</p>
+            
+            <ul>
+                <li><strong>Начало (Старт):</strong> В каких условиях оказывается герой? (Например: «Жили-были», «Осталась одна», «Выгнали из дома»). Это ваша привычная точка входа в любые новые дела.</li>
+                <li><strong>Завязка и Конфликт:</strong> С какой проблемой сталкивается герой? Какие препятствия преодолевает? Это ваши повторяющиеся жизненные трудности.</li>
+                <li><strong>Кульминация:</strong> Момент максимального напряжения. Как герой решает проблему? Сам? С помощью магии? Приходит спаситель?</li>
+                <li><strong>Финал (Самое важное):</strong> Чем всё заканчивается? Сценарий — это не то, как вы живете, а то, к какому финалу вы стремитесь.</li>
+            </ul>
+
+            <div class="illustration-box">
+                <div class="illustration-icon">✦</div>
+                [Иллюстрация: Схематичная карта сказочного королевства, стилизованная под нейронную сеть. Дороги ведут к разным замкам: «Успех», «Одиночество», «Вечная борьба».]
+            </div>
+
+            <div class="footer">
+                <span>Анатомия судьбы</span>
+                <span>2025 | Александр Герасимов</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА 4: ГЛАВА 3 -->
+    <div class="page">
+        <div class="watercolor-blob blob-2" style="left: -150px; bottom: 100px;"></div>
+        <div class="content">
+            <h2>3. Ролевые модели</h2>
+            <p style="text-align: center; margin-bottom: 20px;">Важно не только какая сказка, но и кем вы себя в ней видите.</p>
+
+            <ul>
+                <li><strong>Протагонист (Главный герой):</strong> Вы тот, кто действует, принимает решения и получает результат.</li>
+                <li><strong>Объект:</strong> Вы тот, с кем «случается» сюжет (Золушка ждет, пока её найдут; Колобок катится, пока не съедят).</li>
+                <li><strong>Антагонист:</strong> Иногда мы выбираем роль «злодея», потому что он кажется более сильным, свободным и обладающим ресурсами.</li>
+            </ul>
+
+            <div class="illustration-box">
+                <div class="illustration-icon">✦</div>
+                [Иллюстрация: Театральная маска в руках человека. Снаружи маска широко улыбается, но на внутренней стороне нарисована слеза. Зеркало на заднем плане показывает истинное лицо.]
+            </div>
+
+            <div class="footer">
+                <span>Анатомия судьбы</span>
+                <span>2025 | Александр Герасимов</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА 5: ГЛАВА 4 -->
+    <div class="page">
+        <div class="watercolor-blob blob-1" style="transform: scaleX(-1);"></div>
+        <div class="content">
+            <h2>4. Типология сценариев</h2>
+            
+            <h3>«Колобок»</h3>
+            <p>Стратегия «уйти вовремя». Герой мастерски избегает поглощения (увольнения, брака, ответственности), но в итоге всегда находит свою «Лису», которая его доедает. Жизнь как череда побегов.</p>
+            
+            <h3>«Золушка»</h3>
+            <p>Стратегия «заслужить любовь через страдание». Нужно много работать и терпеть унижения, чтобы в конце пришел Принц (или крупный контракт) и спас.</p>
+            
+            <h3>«Красная Шапочка»</h3>
+            <p>Стратегия «прогулка по лесу с волками». Бессознательный поиск опасности там, где её просили избегать. Риск ради адреналина.</p>
+
+            <div class="illustration-box">
+                <div class="illustration-icon">✦</div>
+                [Иллюстрация: Три расходящиеся тропинки в лесу. Первая обрывается, вторая ведет в терновый куст, третья — в темную чащу. У начала пути стоит указательный камень с надписями сценариев.]
+            </div>
+
+            <div class="footer">
+                <span>Анатомия судьбы</span>
+                <span>2025 | Александр Герасимов</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА 6: ГЛАВА 5 -->
+    <div class="page">
+        <div class="watercolor-blob blob-2" style="opacity: 0.3;"></div>
+        <div class="content">
+            <h2>5. Технология взлома сценария</h2>
+            <p>Сценарий — это жесткая программа. Но её можно переписать, используя инструменты НЛП и осознанности:</p>
+
+            <ul>
+                <li><strong>Инвентаризация:</strong> Вспомните свою любимую сказку. Не ту, что «правильная», а ту, от которой внутри «ёкало».</li>
+                <li><strong>Анализ финала:</strong> Вас устраивает то, к чему пришел герой? Если нет — вы в ловушке.</li>
+                <li><strong>Редактирование:</strong> Что если герой в кульминации поступит иначе? Что если добавить в сказку новый ресурс?</li>
+                <li><strong>Мета-позиция:</strong> Перестаньте быть персонажем. Станьте Автором. Автор не страдает — он пишет сюжет.</li>
+            </ul>
+
+            <div class="illustration-box">
+                <div class="illustration-icon">✦</div>
+                [Иллюстрация: Рука с пером решительно перечеркивает мрачный финал на странице открытой книги и вписывает поверх него слово «СВОБОДА» сияющими золотыми чернилами.]
+            </div>
+
+            <div class="footer">
+                <span>Анатомия судьбы</span>
+                <span>2025 | Александр Герасимов</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА 7: ГЛАВА 6 + ЦИТАТА -->
+    <div class="page">
+        <div class="watercolor-blob blob-1" style="left: -50px; top: -50px;"></div>
+        <div class="content">
+            <h2>6. Практический выход</h2>
+            <p>Знание своего сценария — это инструмент управления результатами.</p>
+            
+            <p><strong>В карьере и деньгах:</strong> Если ваш сценарий — «Золушка», вы будете искать «злую мачеху». Перестаньте ждать фею. Введите роль «Продавца своих услуг».</p>
+            
+            <p><strong>В отношениях:</strong> Сценарий «Красной Шапочки» заставляет выбирать «волков». Осознайте, что «лес» — это ваш выбор. Задайте вопрос: «Какой другой ресурс мне нужен для драйва?»</p>
+
+            <p><strong>В принятии решений:</strong> Любой «тупик» — это момент, где старый сценарий не работает. Разложите ситуацию как сказку. Если идете к финалу «Колобка», меняйте стратегию с бегства на переговоры.</p>
+
+            <div class="illustration-box" style="min-height: 180px;">
+                <div class="illustration-icon">✦</div>
+                [Иллюстрация: Открытая дверь, за которой виден яркий теплый свет. На пороге лежат сброшенные старые, пыльные костюмы сказочных героев.]
+            </div>
+
+            <p style="margin-top: 20px; text-align: center; font-style: italic; font-weight: 500;">
+                «Пока вы не осознаете свой сценарий, он будет управлять вашей жизнью,<br>а вы будете называть это судьбой».
+            </p>
+
+            <div class="footer">
+                <span>Анатомия судьбы</span>
+                <span>2025 | Александр Герасимов</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА 8: ФИНАЛ (ИСПРАВЛЕНА) -->
+    <div class="page">
+        <div class="watercolor-blob blob-1"></div>
+        <div class="watercolor-blob blob-2"></div>
+        <div class="content">
+            
+            <div class="promo-container">
+                
+                <!-- 1. Текст -->
+                <p class="promo-text-unified" style="font-style: italic; margin-bottom: 20px;">
+                    Осознать сценарий — первый шаг. Чтобы изменить ход событий, нужны профессиональные инструменты.
+                </p>
+
+                <!-- 2. Заголовок -->
+                <div class="promo-title">ПЕРЕПИШИТЕ<br>СВОЙ 2026 ГОД</div>
+
+                <!-- 3. Эксклюзивно -->
+                <p class="promo-text-unified" style="text-transform: uppercase; letter-spacing: 2px; font-weight: 700; color: var(--accent-gold); margin-top: 10px;">
+                    ЭКСКЛЮЗИВНО 24-26 ДЕКАБРЯ
+                </p>
+
+                <!-- 4. Распродажа -->
+                <p class="promo-text-unified">
+                    Новогодняя распродажа авторских<br>НЛП-инструментов Александра Герасимова.
+                </p>
+
+                <!-- 5. Скидки -->
+                <p class="promo-text-unified" style="font-weight: 700; font-size: 1.5rem; margin-top: 15px;">
+                    Скидки до 80%
+                </p>
+
+                <a href="#" class="btn-book">
+                    Узнать подробнее
+                    <!-- SVG Cursor Icon -->
+                    <svg class="cursor-icon" viewBox="0 0 320 512" fill="white" stroke="black" stroke-width="10" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M302.189 329.126H196.105l55.831 135.993c3.889 9.428-.555 19.999-9.444 23.999l-49.165 21.427c-9.165 4-19.443-.571-23.332-9.714l-53.053-129.136-86.664 89.138C18.729 472.71 0 463.554 0 447.977V18.299C0 1.899 19.921-6.096 30.277 5.443l284.412 292.542c11.472 11.179 3.007 31.141-12.5 31.141z"/>
+                    </svg>
                 </a>
             </div>
-            <div class="footer w-full">© 2025 Александр Герасимов</div>
+
+            <div class="footer">
+                <span>Анатомия судьбы</span>
+                <span>2025 | Александр Герасимов</span>
+            </div>
         </div>
     </div>
 
-    <script>
-        const apiKey = "AIzaSyBd_eKnv_hyESbCevgYxkaacKVhYr8vOCY"; // Здесь будет работать автоматический ключ среды
-
-        async function runAiAnalysis() {
-            const query = document.getElementById('ai-user-query').value;
-            const resBox = document.getElementById('ai-result');
-            const submitBtn = document.getElementById('ai-submit');
-            if (!query) return;
-            
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = "Думаю...";
-            resBox.style.display = "block";
-            resBox.innerHTML = "Анализирую...";
-
-            const prompt = `Ты - Александр Герасимов, эксперт НЛП. Дай краткий совет (200 симв) без звездочек по: ${query}`;
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                });
-                const data = await response.json();
-                resBox.innerHTML = data.candidates[0].content.parts[0].text;
-            } catch (e) { resBox.innerHTML = "Ошибка API."; } finally { submitBtn.disabled = false; submitBtn.innerHTML = "Анализировать"; }
-        }
-
-        function openAiModal() { document.getElementById('ai-modal').style.display = 'flex'; }
-        function closeAiModal() { document.getElementById('ai-modal').style.display = 'none'; }
-
-        async function fetchImg(prompt, el) {
-            const loader = el.parentElement.querySelector('.loader');
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict?key=${apiKey}`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ instances: [{ prompt: prompt }] })
-                });
-                const d = await response.json();
-                el.src = `data:image/png;base64,${d.predictions[0].bytesBase64Encoded}`;
-                el.onload = () => { el.classList.add('loaded'); loader.style.display = 'none'; };
-            } catch (e) { loader.innerHTML = "!"; }
-        }
-
-        // Запускаем всё параллельно для скорости
-        window.onload = () => { document.querySelectorAll('img[data-prompt]').forEach(i => fetchImg(i.getAttribute('data-prompt'), i)); };
-    </script>
 </body>
 </html>
